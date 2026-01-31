@@ -180,42 +180,32 @@ DB_PATH=./expenses.db
 ENV=development
 ```
 
-## Edge Cases Handled
+## 📋 How to Access Frontend
 
-- ✅ Duplicate form submissions (multiple clicks)
-- ✅ Page refresh after POST request
-- ✅ Slow or failed API responses
-- ✅ Invalid request data (missing fields, invalid formats)
-- ✅ Empty expense lists
-- ✅ Filter with no results
-- ✅ Date parsing errors
-- ✅ Network retries and browser refreshes
+### **Method 1: Web Browser**
+1. Open any web browser (Chrome, Firefox, Edge, etc.)
+2. Navigate to: **http://localhost:8080**
+3. The Expense Tracker UI will load automatically
 
-## Trade-offs Made Due to Time Constraints
+### **Method 2: Direct Link**
+Click or copy this URL:
+```
+http://localhost:8080
+```
 
-1. **Frontend Styling**: Kept simple and functional, focusing on correctness over aesthetics
-2. **Validation**: Basic validation implemented (required fields, date format, positive amounts). Could be enhanced with more sophisticated validation
-3. **Error Messages**: Clear but simple. Could be more detailed in production
-4. **Testing**: Manual testing approach. Automated tests would be added in production
-5. **Loading States**: Basic implementation. Could be enhanced with better UX indicators
+### **Method 3: Command Line (Windows)**
+```powershell
+start http://localhost:8080
+```
 
-## What Was Intentionally Not Done
+## 🎯 Quick Start
 
-1. **Authentication/Authorization**: Not required for this assignment
-2. **User Management**: Single-user application
-3. **Advanced Filtering**: Only category filtering implemented (as per requirements)
-4. **Pagination**: Not required for small-scale personal use
-5. **Export Functionality**: Not in scope
-6. **Category Management**: Categories are free-form text (could be enhanced with predefined categories)
+1. **Ensure server is running**:
+   ```bash
+   go run main.go
+   ```
 
-## Evaluation Criteria Alignment
-
-- ✅ **Correct Behavior Under Realistic Conditions**: Handles retries, refreshes, and network issues
-- ✅ **Data Correctness**: Proper money handling with decimal precision, validated date formats
-- ✅ **Edge Cases**: Comprehensive handling of edge cases
-- ✅ **Code Clarity and Structure**: Clean architecture with separation of concerns (repository, service, handler layers)
-- ✅ **Production-like Quality**: Error handling, logging, middleware, proper HTTP status codes
-
-## License
-
-This project is created as an assignment submission.
+2. **Open browser**:
+   ```
+   http://localhost:8080
+   ```
