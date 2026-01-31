@@ -145,7 +145,7 @@ Retrieve a list of expenses with optional filtering and sorting.
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/Shiv150896-lovely/Fenmo-AI_Assignment.git
 cd Fenmo_AI_Assignment
 ```
 
