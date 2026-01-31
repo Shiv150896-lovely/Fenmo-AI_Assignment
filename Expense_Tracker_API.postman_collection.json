@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "expense-tracker-api-collection",
+		"name": "Expense Tracker API",
+		"description": "API collection for Expense Tracker application built with Gin (Golang)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Expenses",
+			"item": [
+				{
+					"name": "Create Expense",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": \"100.50\",\n  \"category\": \"Food\",\n  \"description\": \"Lunch at restaurant\",\n  \"date\": \"2024-01-15\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/expenses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"expenses"
+							]
+						},
+						"description": "Create a new expense entry.\n\n**Request Body:**\n- `amount` (string, required): Expense amount as decimal string (e.g., \"100.50\")\n- `category` (string, required): Expense category\n- `description` (string, required): Expense description\n- `date` (string, required): Expense date in ISO format (YYYY-MM-DD)\n\n**Response:**\n- 201 Created: Returns the created expense object with generated `id` and `created_at`\n- 400 Bad Request: Invalid request data (missing fields, invalid format)\n- 500 Internal Server Error: Server error\n\n**Idempotency:** Server generates unique ID for each request, allowing duplicate expenses."
+					},
+					"response": [
+						{
+							"name": "Success - Expense Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": \"100.50\",\n  \"category\": \"Food\",\n  \"description\": \"Lunch at restaurant\",\n  \"date\": \"2024-01-15\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/expenses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"expenses"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"amount\": \"100.50\",\n  \"category\": \"Food\",\n  \"description\": \"Lunch at restaurant\",\n  \"date\": \"2024-01-15\",\n  \"created_at\": \"2024-01-15T10:30:00Z\"\n}"
+						},
+						{
+							"name": "Error - Missing Field",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": \"100.50\",\n  \"category\": \"Food\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/expenses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"expenses"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"error\": \"Invalid request: Key: 'CreateExpenseRequest.Description' Error:Field validation for 'Description' failed on the 'required' tag\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Expenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/expenses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"expenses"
+							]
+						},
+						"description": "Retrieve all expenses.\n\n**Query Parameters:** None\n\n**Response:**\n- 200 OK: Returns array of expense objects\n- 500 Internal Server Error: Server error\n\n**Idempotency:** Fully idempotent - safe for retries and page reloads."
+					},
+					"response": [
+						{
+							"name": "Success - List of Expenses",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/expenses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"expenses"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "[\n  {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"amount\": \"100.50\",\n    \"category\": \"Food\",\n    \"description\": \"Lunch at restaurant\",\n    \"date\": \"2024-01-15\",\n    \"created_at\": \"2024-01-15T10:30:00Z\"\n  },\n  {\n    \"id\": \"660e8400-e29b-41d4-a716-446655440001\",\n    \"amount\": \"50.00\",\n    \"category\": \"Transport\",\n    \"description\": \"Taxi fare\",\n    \"date\": \"2024-01-14\",\n    \"created_at\": \"2024-01-14T09:15:00Z\"\n  }\n]"
+						},
+						{
+							"name": "Success - Empty List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/expenses",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"expenses"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "Get Expenses - Filter by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/expenses?category=Food",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"expenses"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Food",
+									"description": "Filter expenses by category (exact match)"
+								}
+							]
+						},
+						"description": "Retrieve expenses filtered by category.\n\n**Query Parameters:**\n- `category` (string, optional): Filter expenses by category (exact match)\n\n**Response:**\n- 200 OK: Returns array of expense objects matching the category\n- 500 Internal Server Error: Server error"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Expenses - Sort by Date (Newest First)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/expenses?sort=date_desc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"expenses"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "date_desc",
+									"description": "Sort order - 'date_desc' sorts by date descending (newest first)"
+								}
+							]
+						},
+						"description": "Retrieve expenses sorted by date (newest first).\n\n**Query Parameters:**\n- `sort` (string, optional): Sort order. Use `date_desc` to sort by date descending (newest first)\n\n**Response:**\n- 200 OK: Returns array of expense objects sorted by date (newest first)\n- 500 Internal Server Error: Server error"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Expenses - Filter by Category and Sort",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/expenses?category=Food&sort=date_desc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"expenses"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Food",
+									"description": "Filter expenses by category (exact match)"
+								},
+								{
+									"key": "sort",
+									"value": "date_desc",
+									"description": "Sort order - 'date_desc' sorts by date descending (newest first)"
+								}
+							]
+						},
+						"description": "Retrieve expenses filtered by category and sorted by date (newest first).\n\n**Query Parameters:**\n- `category` (string, optional): Filter expenses by category (exact match)\n- `sort` (string, optional): Sort order. Use `date_desc` to sort by date descending (newest first)\n\n**Response:**\n- 200 OK: Returns array of expense objects filtered by category and sorted by date (newest first)\n- 500 Internal Server Error: Server error"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing expenses"
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

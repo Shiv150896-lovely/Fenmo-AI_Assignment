@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Expense Tracker</h1>
+        
+        <!-- Add Expense Form -->
+        <div class="form-section">
+            <h2>Add New Expense</h2>
+            <form id="expenseForm">
+                <div class="form-group">
+                    <label for="amount">Amount (₹):</label>
+                    <input type="text" id="amount" name="amount" required placeholder="100.50">
+                </div>
+                
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <input type="text" id="category" name="category" required placeholder="Food">
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description" required placeholder="Lunch at restaurant">
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                
+                <button type="submit" id="submitBtn">Add Expense</button>
+            </form>
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+        </div>
+
+        <!-- Filters and Controls -->
+        <div class="controls-section">
+            <h2>Expenses</h2>
+            <div class="controls">
+                <div class="control-group">
+                    <label for="categoryFilter">Filter by Category:</label>
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="sortOption">Sort:</label>
+                    <select id="sortOption">
+                        <option value="">Default</option>
+                        <option value="date_desc">Date (Newest First)</option>
+                    </select>
+                </div>
+                
+                <button id="refreshBtn">Refresh</button>
+            </div>
+            
+            <div class="total-section">
+                <strong>Total: ₹<span id="totalAmount">0.00</span></strong>
+            </div>
+        </div>
+
+        <!-- Expenses List -->
+        <div class="expenses-section">
+            <div id="loadingMessage" class="loading-message">Loading expenses...</div>
+            <div id="expensesList"></div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
