@@ -1,0 +1,24 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fenmoai_api
+
+    environment:
+      # SQLite database file path inside container
+      DB_DRIVER: sqlite
+      DB_PATH: /data/fenmoai.db
+
+      # Keep container listen port fixed to match container port mapping
+      SERVER_PORT: "8080"
+
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+
+    volumes:
+      # Persist SQLite database file
+      - sqlite_data:/data
+
+volumes:
+  sqlite_data:

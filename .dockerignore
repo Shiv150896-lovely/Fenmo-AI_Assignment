@@ -1,0 +1,11 @@
+.git
+.gitignore
+.env
+.env.*
+*.md
+**/*_test.go
+tmp
+bin
+dist
+node_modules
+terminals
